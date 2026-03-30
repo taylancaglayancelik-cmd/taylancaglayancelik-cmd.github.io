@@ -5,7 +5,6 @@
 <title>Zeytin Catalköy</title>
 
 <style>
-
 body {
     font-family: 'Georgia', 'Garamond', serif;
     background-color: #fafaf8;
@@ -26,7 +25,6 @@ nav a {
     color: #2c2c2c;
     text-decoration: none;
     font-size: 14px;
-    letter-spacing: 0.5px;
 }
 
 nav a:hover {
@@ -44,15 +42,11 @@ nav a:hover {
 
 .menu-item {
     background: white;
-    padding: 0;
     border: 1px solid #e0dcd6;
-    text-align: left;
 }
 
 .menu-item img {
     width: 100%;
-    height: auto;
-    display: block;
 }
 
 .menu-item-content {
@@ -60,171 +54,35 @@ nav a:hover {
 }
 
 .menu-name {
-    font-size: 16px;
     font-weight: 600;
     color: #d4b56a;
-    margin: 0 0 8px 0;
-}
-
-.description {
-    margin: 0 0 12px 0;
-    font-size: 13px;
-    color: #555;
-    line-height: 1.5;
 }
 
 .price {
-    font-size: 14px;
     font-weight: 600;
-    color: #2c2c2c;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.add-cart button {
+.add-cart button, .cart button {
     background: #d4b56a;
     border: none;
-    padding: 8px 16px;
-    cursor: pointer;
+    padding: 10px;
     color: white;
-    font-size: 12px;
-    letter-spacing: 0.5px;
-}
-
-.add-cart button:hover {
-    background: #c49a52;
-}
-
-.dietary-badges {
-    display: flex;
-    gap: 8px;
-    margin: 10px 0;
-    flex-wrap: wrap;
-}
-
-.badge {
-    display: inline-block;
-    padding: 4px 10px;
-    background-color: #f0f0f0;
-    color: #2c2c2c;
-    font-size: 11px;
-    font-weight: 600;
-    border-radius: 3px;
-    letter-spacing: 0.5px;
-    border-left: 3px solid #d4b56a;
+    cursor: pointer;
 }
 
 .cart {
     background: white;
     max-width: 700px;
-    margin: 60px auto 40px;
-    padding: 40px 35px;
+    margin: 40px auto;
+    padding: 30px;
     border: 1px solid #e0dcd6;
-    text-align: left;
-}
-
-.cart h2 {
-    margin-top: 0;
-    color: #d4b56a;
-    font-weight: normal;
-    letter-spacing: 1px;
 }
 
 .cart ul {
     list-style: none;
     padding: 0;
 }
-
-.cart li {
-    padding: 10px 0;
-    border-bottom: 1px solid #e0dcd6;
-}
-
-.cart button {
-    background: #d4b56a;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    color: white;
-    margin-top: 20px;
-    letter-spacing: 0.5px;
-}
-
-.info-box {
-    background: white;
-    max-width: 700px;
-    margin: 60px auto 80px;
-    padding: 40px 35px;
-    border: 1px solid #e0dcd6;
-    text-align: left;
-    line-height: 1.7;
-}
-
-.info-box img {
-    width: 100%;
-    margin-bottom: 25px;
-}
-
-.info-box h3 {
-    margin-top: 0;
-    color: #d4b56a;
-    font-weight: normal;
-    letter-spacing: 0.5px;
-}
-
-.info-box p {
-    margin-bottom: 15px;
-}
-
-.brand-story {
-    background: white;
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 40px 35px;
-    border: 1px solid #e0dcd6;
-    text-align: left;
-    line-height: 1.7;
-}
-
-.brand-story p {
-    margin: 0;
-    color: #555;
-}
-
-.dietary-info {
-    background: white;
-    max-width: 700px;
-    margin: 60px auto 80px;
-    padding: 40px 35px;
-    border: 1px solid #e0dcd6;
-    text-align: left;
-    line-height: 1.7;
-}
-
-.dietary-info h3 {
-    margin-top: 0;
-    color: #d4b56a;
-    font-weight: normal;
-    letter-spacing: 0.5px;
-}
-
-.dietary-info p {
-    margin-bottom: 0;
-    color: #555;
-}
-
-.banner {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
-}
-
-.banner img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
 </style>
 </head>
 
@@ -238,184 +96,109 @@ nav a:hover {
   <a href="contact us.html">Contact us</a>
 </nav>
 
-<div class="banner">
-<img src="images/menu banner.png" alt="Zeytin Catalkoy Menu">
-</div>
-
 <div class="cart">
-
 <h2>Your Order</h2>
-
 <ul id="cart-items"></ul>
-
 <p>Total: £<span id="cart-total">0.00</span></p>
-
 <button onclick="checkout()">Checkout</button>
-
-</div>
-
-<div class="brand-story">
-<p>At Zeytin Çatalköy, we celebrate the rich culinary traditions of Cyprus and the Mediterranean. Our recipes are inspired by generations of home cooking, using fresh ingredients, bold spices, and time-honored techniques to bring you an authentic dining experience.</p>
 </div>
 
 <div class="menu-gallery">
 
 <div class="menu-item">
-<img src="images/lahmacun zeytin catalkoy.png" alt="Lahmacun">
+<img src="images/lahmacun zeytin catalkoy.png">
 <div class="menu-item-content">
 <p class="menu-name">Lahmacun</p>
-<p class="description">Crispy thin bread topped with minced meat, tomato, herbs and spices. A Turkish favorite.</p>
 <p class="price">£17.99</p>
-<div class="add-cart">
 <button onclick="addToCart('Lahmacun',17.99)">Add to Cart</button>
 </div>
 </div>
-</div>
 
 <div class="menu-item">
-<img src="images/mokup menu kebab.png" alt="Kebab">
+<img src="images/mokup menu kebab.png">
 <div class="menu-item-content">
 <p class="menu-name">Kebab</p>
-<p class="description">Minced meat seasoned with Mediterranean herbs and spices, grilled over an open flame. Tender and flavorful.</p>
 <p class="price">£22.49</p>
-<div class="add-cart">
 <button onclick="addToCart('Kebab',22.49)">Add to Cart</button>
 </div>
 </div>
-</div>
 
 <div class="menu-item">
-<img src="images/zeytin cigara bureki.png" alt="Cigara Borek">
+<img src="images/zeytin cigara bureki.png">
 <div class="menu-item-content">
 <p class="menu-name">Cigara Borek</p>
-<p class="description">Crispy pastry rolls filled with cheese and fresh herbs. A classic Mediterranean appetizer.</p>
-<div class="dietary-badges">
-<span class="badge">(V) Vegetarian</span>
-</div>
 <p class="price">£6.99</p>
-<div class="add-cart">
 <button onclick="addToCart('Cigara Borek',6.99)">Add to Cart</button>
 </div>
 </div>
-</div>
 
 <div class="menu-item">
-<img src="images/zeytin hellim.png" alt="Hellim">
+<img src="images/zeytin hellim.png">
 <div class="menu-item-content">
 <p class="menu-name">Hellim</p>
-<p class="description">Grilled slices of authentic Cypriot Halloumi cheese with a warm, chewy center. Garnished with fresh mint and lemon.</p>
-<div class="dietary-badges">
-<span class="badge">(V) Vegetarian</span>
-<span class="badge">(GF) Gluten-Free</span>
-</div>
 <p class="price">£8.99</p>
-<div class="add-cart">
 <button onclick="addToCart('Hellim',8.99)">Add to Cart</button>
 </div>
 </div>
-</div>
 
 <div class="menu-item">
-<img src="images/zeytin turkish delight.png" alt="Turkish Delight">
+<img src="images/zeytin turkish delight.png">
 <div class="menu-item-content">
 <p class="menu-name">Turkish Delight</p>
-<p class="description">Soft, chewy confections infused with rosewater and citrus, topped with nuts and powdered sugar. The perfect sweet ending.</p>
-<div class="dietary-badges">
-<span class="badge">(V) Vegetarian</span>
-<span class="badge">(GF) Gluten-Free</span>
-</div>
 <p class="price">£17.99</p>
-<div class="add-cart">
 <button onclick="addToCart('Turkish Delight',17.99)">Add to Cart</button>
 </div>
 </div>
-</div>
 
-<div class="info-box">
-
-<img src="images/Bxvtf.jpg" alt="Chef Sakaria Ali">
-
-<h3>Meet Our Chef</h3>
-
-<p>
-At Zeytin Catalköy, we believe great food comes from passion. Our head chef Sakaria Ali brings decades of experience and tradition to every dish that leaves our kitchen.
-</p>
-
-<p style="font-style: italic; margin-top: 20px;">
-"Cooking isn't just what I do—it's who I am. Every plate that goes out gets my personal attention. I take pride in knowing that when you come to Zeytin, you're getting food prepared with care by someone who genuinely wants you to enjoy it."
-</p>
-
-<p style="text-align: right; font-weight: 600; margin-bottom: 0;">
-— Sakaria Ali, Head Chef
-</p>
-
-</div>
-
-</div>
-
-<div class="dietary-info">
-<h3>Dietary Information</h3>
-<p>Please inform us of any allergies or dietary requirements. Vegetarian options are available, and many dishes can be adapted to suit your needs.</p>
 </div>
 
 <script>
-
 let cart = [];
-let total = 0;
 
-function addToCart(item, price){
-
-cart.push({item, price});
-
-total += price;
-
-updateCart();
-
+function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCart();
 }
 
-function updateCart(){
+function updateCart() {
+    const cartList = document.getElementById("cart-items");
+    const totalElement = document.getElementById("cart-total");
 
-const cartItems = document.getElementById("cart-items");
+    cartList.innerHTML = "";
+    let total = 0;
 
-cartItems.innerHTML = "";
+    cart.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = item.name + " - £" + item.price.toFixed(2) +
+        ' <button onclick="removeItem('+index+')">Remove</button>';
+        cartList.appendChild(li);
+        total += item.price;
+    });
 
-cart.forEach((product,index)=>{
-
-let li = document.createElement("li");
-
-li.innerHTML = product.item + " - £" + product.price.toFixed(2) +
-' <button onclick="removeItem('+index+')">Remove</button>';
-
-cartItems.appendChild(li);
-
-});
-
-document.getElementById("cart-total").innerText = total.toFixed(2);
-
+    totalElement.textContent = total.toFixed(2);
 }
 
-function removeItem(index){
-
-total -= cart[index].price;
-
-cart.splice(index,1);
-
-updateCart();
-
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
 }
 
-function checkout(){
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
 
-alert("Thank you for your order! Total: £" + total.toFixed(2));
+    let total = 0;
+    cart.forEach(item => total += item.price);
 
-cart = [];
+    let quantity = Math.ceil(total);
 
-total = 0;
+    let stripeLink = "https://buy.stripe.com/9B63coc3ybye6Az34les000";
 
-updateCart();
-
+    alert("Redirecting to secure payment...");
+    window.location.href = stripeLink + "?quantity=" + quantity;
 }
-
 </script>
 
 </body>
