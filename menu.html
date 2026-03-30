@@ -56,6 +56,8 @@ nav a:hover {
 .menu-item {
     background: white;
     border: 1px solid #e0dcd6;
+    position: relative;
+    overflow: visible;
 }
 
 .menu-item img {
@@ -64,6 +66,78 @@ nav a:hover {
 
 .menu-item-content {
     padding: 20px;
+}
+
+.dietary-tab {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 235px;
+    background: #fffdf9;
+    border: 1px solid #e0dcd6;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+    padding: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 6;
+}
+
+.menu-item:hover .dietary-tab,
+.menu-item:focus-within .dietary-tab {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dietary-title {
+    margin: 0 0 8px;
+    font-size: 13px;
+    color: #d4b56a;
+    font-weight: 700;
+}
+
+.dietary-text {
+    margin: 0 0 8px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.45;
+}
+
+.dietary-list {
+    margin: 0 0 8px;
+    padding-left: 16px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.45;
+}
+
+.dietary-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.dietary-badge {
+    font-size: 11px;
+    padding: 4px 7px;
+    border: 1px solid #d4b56a;
+    color: #7a5c1f;
+    background: #f8efda;
+}
+
+.dietary-badge.alt {
+    border-color: #cfc7b8;
+    color: #666;
+    background: #f5f3ee;
+}
+
+@media (max-width: 640px) {
+    .dietary-tab {
+        width: 210px;
+        right: 8px;
+    }
 }
 
 .menu-name {
@@ -268,6 +342,23 @@ nav a:hover {
 <p class="price">£17.99</p>
 <button onclick="addToCart('Lahmacun',17.99)">Add to Cart</button>
 </div>
+<div class="dietary-tab">
+<p class="dietary-title">Dietary Information</p>
+<p class="dietary-text"><strong>Estimated calories:</strong> ~620 kcal</p>
+<p class="dietary-text"><strong>Ingredients:</strong></p>
+<ul class="dietary-list">
+<li>Thin dough base</li>
+<li>Minced halal lamb and beef</li>
+<li>Tomato, onion, parsley</li>
+<li>Pepper paste, herbs and spices</li>
+</ul>
+<div class="dietary-badges">
+<span class="dietary-badge">Halal</span>
+<span class="dietary-badge alt">Not Vegetarian</span>
+<span class="dietary-badge alt">Not Vegan</span>
+<span class="dietary-badge alt">Contains Gluten</span>
+</div>
+</div>
 </div>
 
 <div class="menu-item">
@@ -276,6 +367,24 @@ nav a:hover {
 <p class="menu-name">Kebab</p>
 <p class="price">£22.49</p>
 <button onclick="addToCart('Kebab',22.49)">Add to Cart</button>
+</div>
+<div class="dietary-tab">
+<p class="dietary-title">Dietary Information</p>
+<p class="dietary-text"><strong>Estimated calories:</strong> ~760 kcal</p>
+<p class="dietary-text"><strong>Ingredients:</strong></p>
+<ul class="dietary-list">
+<li>Chargrilled halal marinated meat</li>
+<li>Olive oil, garlic, lemon</li>
+<li>Turkish spices and herbs</li>
+<li>Served with grilled vegetables</li>
+</ul>
+<div class="dietary-badges">
+<span class="dietary-badge">Halal</span>
+<span class="dietary-badge alt">Not Vegetarian</span>
+<span class="dietary-badge alt">Not Vegan</span>
+<span class="dietary-badge">Gluten Free*</span>
+</div>
+<p class="dietary-text">*Gluten free when ordered without bread.</p>
 </div>
 </div>
 
@@ -286,6 +395,23 @@ nav a:hover {
 <p class="price">£6.99</p>
 <button onclick="addToCart('Cigara Borek',6.99)">Add to Cart</button>
 </div>
+<div class="dietary-tab">
+<p class="dietary-title">Dietary Information</p>
+<p class="dietary-text"><strong>Estimated calories:</strong> ~390 kcal</p>
+<p class="dietary-text"><strong>Ingredients:</strong></p>
+<ul class="dietary-list">
+<li>Yufka pastry rolls</li>
+<li>Feta and mixed cheese filling</li>
+<li>Fresh parsley and herbs</li>
+<li>Lightly fried in sunflower oil</li>
+</ul>
+<div class="dietary-badges">
+<span class="dietary-badge">Halal</span>
+<span class="dietary-badge">Vegetarian</span>
+<span class="dietary-badge alt">Not Vegan</span>
+<span class="dietary-badge alt">Contains Gluten</span>
+</div>
+</div>
 </div>
 
 <div class="menu-item">
@@ -295,6 +421,23 @@ nav a:hover {
 <p class="price">£8.99</p>
 <button onclick="addToCart('Hellim',8.99)">Add to Cart</button>
 </div>
+<div class="dietary-tab">
+<p class="dietary-title">Dietary Information</p>
+<p class="dietary-text"><strong>Estimated calories:</strong> ~340 kcal</p>
+<p class="dietary-text"><strong>Ingredients:</strong></p>
+<ul class="dietary-list">
+<li>Grilled hellim (halloumi) cheese</li>
+<li>Olive oil glaze</li>
+<li>Lemon and oregano seasoning</li>
+<li>Served with salad garnish</li>
+</ul>
+<div class="dietary-badges">
+<span class="dietary-badge">Halal</span>
+<span class="dietary-badge">Vegetarian</span>
+<span class="dietary-badge alt">Not Vegan</span>
+<span class="dietary-badge">Gluten Free</span>
+</div>
+</div>
 </div>
 
 <div class="menu-item">
@@ -303,6 +446,23 @@ nav a:hover {
 <p class="menu-name">Turkish Delight</p>
 <p class="price">£17.99</p>
 <button onclick="addToCart('Turkish Delight',17.99)">Add to Cart</button>
+</div>
+<div class="dietary-tab">
+<p class="dietary-title">Dietary Information</p>
+<p class="dietary-text"><strong>Estimated calories:</strong> ~260 kcal</p>
+<p class="dietary-text"><strong>Ingredients:</strong></p>
+<ul class="dietary-list">
+<li>Sugar syrup and starch</li>
+<li>Rosewater and citrus notes</li>
+<li>Pistachio pieces</li>
+<li>Dusted with icing sugar</li>
+</ul>
+<div class="dietary-badges">
+<span class="dietary-badge">Halal</span>
+<span class="dietary-badge">Vegetarian</span>
+<span class="dietary-badge">Vegan</span>
+<span class="dietary-badge">Gluten Free</span>
+</div>
 </div>
 </div>
 
