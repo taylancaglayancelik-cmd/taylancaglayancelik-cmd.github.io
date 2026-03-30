@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Zeytin Catalköy</title>
+
+<style>
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    background-color: #fafaf8;
+    color: #2c2c2c;
+    margin: 0;
+}
+
+nav {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0dcd6;
+    text-align: center;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 30px;
+    color: #2c2c2c;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #d4b56a;
+}
+
+.menu-gallery {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 0 20px;
+}
+
+.menu-item {
+    background: white;
+    border: 1px solid #e0dcd6;
+}
+
+.menu-item img {
+    width: 100%;
+}
+
+.menu-item-content {
+    padding: 20px;
+}
+
+.menu-name {
+    font-weight: 600;
+    color: #d4b56a;
+}
+
+.price {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.add-cart button, .cart button {
+    background: #d4b56a;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.cart {
+    background: white;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #e0dcd6;
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="location.html">Locations</a>
+  <a href="about us.html">About us</a>
+  <a href="contact us.html">Contact us</a>
+</nav>
+
+<div class="cart">
+<h2>Your Order</h2>
+<ul id="cart-items"></ul>
+<p>Total: £<span id="cart-total">0.00</span></p>
+<button onclick="checkout()">Checkout</button>
+</div>
+
+<div class="menu-gallery">
+
+<div class="menu-item">
+<img src="images/lahmacun zeytin catalkoy.png">
+<div class="menu-item-content">
+<p class="menu-name">Lahmacun</p>
+<p class="price">£17.99</p>
+<button onclick="addToCart('Lahmacun',17.99)">Add to Cart</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="images/mokup menu kebab.png">
+<div class="menu-item-content">
+<p class="menu-name">Kebab</p>
+<p class="price">£22.49</p>
+<button onclick="addToCart('Kebab',22.49)">Add to Cart</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="images/zeytin cigara bureki.png">
+<div class="menu-item-content">
+<p class="menu-name">Cigara Borek</p>
+<p class="price">£6.99</p>
+<button onclick="addToCart('Cigara Borek',6.99)">Add to Cart</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="images/zeytin hellim.png">
+<div class="menu-item-content">
+<p class="menu-name">Hellim</p>
+<p class="price">£8.99</p>
+<button onclick="addToCart('Hellim',8.99)">Add to Cart</button>
+</div>
+</div>
+
+<div class="menu-item">
+<img src="images/zeytin turkish delight.png">
+<div class="menu-item-content">
+<p class="menu-name">Turkish Delight</p>
+<p class="price">£17.99</p>
+<button onclick="addToCart('Turkish Delight',17.99)">Add to Cart</button>
+</div>
+</div>
+
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCart();
+}
+
+function updateCart() {
+    const cartList = document.getElementById("cart-items");
+    const totalElement = document.getElementById("cart-total");
+
+    cartList.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        let li = document.createElement("li");
+        li.innerHTML = item.name + " - £" + item.price.toFixed(2) +
+        ' <button onclick="removeItem('+index+')">Remove</button>';
+        cartList.appendChild(li);
+        total += item.price;
+    });
+
+    totalElement.textContent = total.toFixed(2);
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    let total = 0;
+    cart.forEach(item => total += item.price);
+
+    let quantity = Math.ceil(total);
+
+    let stripeLink = "https://buy.stripe.com/9B63coc3ybye6Az34les000";
+
+    alert("Redirecting to secure payment...");
+    window.location.href = stripeLink + "?quantity=" + quantity;
+}
+</script>
+
+</body>
+</html>
