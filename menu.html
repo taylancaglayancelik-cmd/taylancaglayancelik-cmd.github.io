@@ -363,13 +363,13 @@ function buildCrateTrack(totalItems, winningIndex, winningLabel) {
     let html = "";
 
     for (let i = 0; i < totalItems; i++) {
-        let label = Math.random() < 0.18 ? "TaylansGift" : "Nothing";
+        let label = Math.random() < 0.18 ? "Win" : "Nothing";
 
         if (i === winningIndex) {
             label = winningLabel;
         }
 
-        const cssClass = label === "TaylansGift" ? "win" : "nothing";
+        const cssClass = label === "Win" ? "win" : "nothing";
         html += '<div class="crate-item ' + cssClass + '">' + label + "</div>";
     }
 
@@ -425,7 +425,7 @@ function spinCrate() {
     result.textContent = "Spinning...";
 
     const isWin = Math.random() < 0.25;
-    const winningLabel = isWin ? "TaylansGift" : "Nothing";
+    const winningLabel = isWin ? "Win" : "Nothing";
 
     const totalItems = 42;
     const winningIndex = Math.floor(Math.random() * 7) + 30;
