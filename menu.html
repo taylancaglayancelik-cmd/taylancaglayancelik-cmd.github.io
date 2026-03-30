@@ -84,6 +84,133 @@ nav a:hover {
     padding: 0;
 }
 
+.crate-section {
+    background: white;
+    border: 1px solid #e0dcd6;
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding: 26px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    color: #2c2c2c;
+}
+
+.crate-title {
+    margin: 0 0 8px;
+    font-size: 24px;
+    letter-spacing: 0.6px;
+    color: #d4b56a;
+    font-weight: normal;
+}
+
+.crate-subtitle {
+    margin: 0 0 20px;
+    color: #555;
+    font-size: 14px;
+}
+
+.crate-window-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e0dcd6;
+    background: linear-gradient(180deg, #fcfcfb, #f4f1eb);
+}
+
+.crate-marker {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid #d4b56a;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+.crate-window {
+    height: 126px;
+    overflow: hidden;
+}
+
+.crate-track {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 18px 16px;
+    transform: translateX(0);
+}
+
+.crate-item {
+    flex: 0 0 160px;
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    border: 1px solid #d8d2c5;
+    background: linear-gradient(180deg, #ffffff, #efebe4);
+}
+
+.crate-item.nothing {
+    border-color: #d8d2c5;
+    background: linear-gradient(180deg, #ffffff, #efebe4);
+    color: #7a7161;
+}
+
+.crate-item.win {
+    border-color: #d4b56a;
+    background: linear-gradient(180deg, #f2ddb0, #d4b56a);
+    color: #3a2b10;
+}
+
+.crate-controls {
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.spin-btn {
+    background: #d4b56a;
+    border: none;
+    padding: 12px 20px;
+    color: #1f1608;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.spin-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.spin-result {
+    font-size: 14px;
+    color: #555;
+}
+
+.spin-result.win-text {
+    color: #9d7a32;
+}
+
+@media (max-width: 640px) {
+    .crate-section {
+        margin: 30px 15px 0;
+        padding: 18px;
+    }
+
+    .crate-item {
+        flex: 0 0 130px;
+        font-size: 12px;
+    }
+}
+
 /* Copyright */
 .copyright {
     position: fixed;
@@ -113,6 +240,23 @@ nav a:hover {
 <ul id="cart-items"></ul>
 <p>Total: £<span id="cart-total">0.00</span></p>
 <button onclick="checkout()">Checkout</button>
+</div>
+
+<div class="crate-section">
+<h2 class="crate-title">Play to win a discount!</h2>
+<p class="crate-subtitle">25% chance of winning 15% off</p>
+
+<div class="crate-window-wrapper">
+<div class="crate-marker"></div>
+<div class="crate-window">
+<div class="crate-track" id="crate-track"></div>
+</div>
+</div>
+
+<div class="crate-controls">
+<button class="spin-btn" id="spin-button" onclick="spinCrate()">Spin Crate</button>
+<p class="spin-result" id="spin-result">Press spin to test your luck.</p>
+</div>
 </div>
 
 <div class="menu-gallery">
@@ -166,6 +310,8 @@ nav a:hover {
 
 <script>
 let cart = [];
+let spinInProgress = false;
+const spinStorageKey = "zeytinCrateLastSpinDate";
 
 function addToCart(name, price) {
     cart.push({ name, price });
@@ -211,6 +357,112 @@ function checkout() {
     alert("Redirecting to secure payment...");
     window.location.href = stripeLink + "?quantity=" + quantity;
 }
+
+function buildCrateTrack(totalItems, winningIndex, winningLabel) {
+    const track = document.getElementById("crate-track");
+    let html = "";
+
+    for (let i = 0; i < totalItems; i++) {
+        let label = Math.random() < 0.18 ? "TaylansGift" : "Nothing";
+
+        if (i === winningIndex) {
+            label = winningLabel;
+        }
+
+        const cssClass = label === "TaylansGift" ? "win" : "nothing";
+        html += '<div class="crate-item ' + cssClass + '">' + label + "</div>";
+    }
+
+    track.innerHTML = html;
+}
+
+function getTodayDateKey() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return year + "-" + month + "-" + day;
+}
+
+function hasSpunToday() {
+    return localStorage.getItem(spinStorageKey) === getTodayDateKey();
+}
+
+function setSpunToday() {
+    localStorage.setItem(spinStorageKey, getTodayDateKey());
+}
+
+function updateSpinAvailability() {
+    const spinButton = document.getElementById("spin-button");
+    const result = document.getElementById("spin-result");
+
+    if (hasSpunToday()) {
+        spinButton.disabled = true;
+        result.textContent = "You have already used your spin today. Come back tomorrow.";
+        return;
+    }
+
+    if (!spinInProgress) {
+        spinButton.disabled = false;
+        result.textContent = "Press spin to test your luck.";
+    }
+}
+
+function spinCrate() {
+    if (spinInProgress || hasSpunToday()) {
+        updateSpinAvailability();
+        return;
+    }
+
+    spinInProgress = true;
+
+    const spinButton = document.getElementById("spin-button");
+    const result = document.getElementById("spin-result");
+    const track = document.getElementById("crate-track");
+
+    spinButton.disabled = true;
+    result.classList.remove("win-text");
+    result.textContent = "Spinning...";
+
+    const isWin = Math.random() < 0.25;
+    const winningLabel = isWin ? "TaylansGift" : "Nothing";
+
+    const totalItems = 42;
+    const winningIndex = Math.floor(Math.random() * 7) + 30;
+    buildCrateTrack(totalItems, winningIndex, winningLabel);
+
+    track.style.transition = "none";
+    track.style.transform = "translateX(0)";
+
+    const firstItem = track.querySelector(".crate-item");
+    const wrapper = document.querySelector(".crate-window-wrapper");
+    const markerCenter = wrapper.clientWidth / 2;
+    const itemWidth = firstItem ? firstItem.offsetWidth : 160;
+    const gap = 12;
+    const targetCenter = 16 + winningIndex * (itemWidth + gap) + itemWidth / 2;
+    const targetTranslate = markerCenter - targetCenter;
+
+    requestAnimationFrame(function () {
+        track.style.transition = "transform 5s cubic-bezier(0.08, 0.76, 0.12, 1)";
+        track.style.transform = "translateX(" + targetTranslate + "px)";
+    });
+
+    setTimeout(function () {
+        spinInProgress = false;
+        setSpunToday();
+        spinButton.disabled = true;
+
+        if (isWin) {
+            result.classList.add("win-text");
+            result.textContent = 'Congratulations you have won 15% off your order: use code "TaylansGift" at checkout.';
+        } else {
+            result.textContent = "No win this time. You can spin again tomorrow.";
+        }
+    }, 5200);
+}
+
+buildCrateTrack(24, 12, "Nothing");
+updateSpinAvailability();
 </script>
 
 <div class="copyright">&copy; Zeytin Catalköy</div>
