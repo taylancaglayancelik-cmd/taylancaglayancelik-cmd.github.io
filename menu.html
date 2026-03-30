@@ -31,6 +31,19 @@ nav a:hover {
     color: #d4b56a;
 }
 
+.banner {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .menu-gallery {
     max-width: 1000px;
     margin: 60px auto;
@@ -235,28 +248,15 @@ nav a:hover {
   <a href="contact us.html">Contact us</a>
 </nav>
 
+<div class="banner">
+<img src="images/menu banner.png" alt="Zeytin Catalkoy Menu">
+</div>
+
 <div class="cart">
 <h2>Your Order</h2>
 <ul id="cart-items"></ul>
 <p>Total: £<span id="cart-total">0.00</span></p>
 <button onclick="checkout()">Checkout</button>
-</div>
-
-<div class="crate-section">
-<h2 class="crate-title">Play to win a discount!</h2>
-<p class="crate-subtitle">25% chance of winning 15% off</p>
-
-<div class="crate-window-wrapper">
-<div class="crate-marker"></div>
-<div class="crate-window">
-<div class="crate-track" id="crate-track"></div>
-</div>
-</div>
-
-<div class="crate-controls">
-<button class="spin-btn" id="spin-button" onclick="spinCrate()">Spin Crate</button>
-<p class="spin-result" id="spin-result">Press spin to test your luck.</p>
-</div>
 </div>
 
 <div class="menu-gallery">
@@ -306,6 +306,23 @@ nav a:hover {
 </div>
 </div>
 
+</div>
+
+<div class="crate-section">
+<h2 class="crate-title">Play to win a discount!</h2>
+<p class="crate-subtitle">25% chance of winning 15% off</p>
+
+<div class="crate-window-wrapper">
+<div class="crate-marker"></div>
+<div class="crate-window">
+<div class="crate-track" id="crate-track"></div>
+</div>
+</div>
+
+<div class="crate-controls">
+<button class="spin-btn" id="spin-button" onclick="spinCrate()">Spin Crate</button>
+<p class="spin-result" id="spin-result">Press spin to test your luck.</p>
+</div>
 </div>
 
 <script>
