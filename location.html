@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Zeytin Catalköy Locations</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+body {
+    font-family: 'Georgia', 'Garamond', serif;
+    background-color:#fafaf8;
+    color:#2c2c2c;
+    margin:0;
+}
+
+nav {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e0dcd6;
+    text-align: center;
+}
+
+nav a {
+    display: inline-block;
+    padding: 10px 30px;
+    color: #2c2c2c;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+nav a:hover {
+    color: #d4b56a;
+}
+
+/* Banner */
+.banner {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+.banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Map container */
+#map {
+    width: 90%;
+    height: 450px;
+    margin: 40px auto;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* Content sections */
+.content-section{
+    background: white;
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 40px 35px;
+    border: 1px solid #e0dcd6;
+    text-align: left;
+    line-height: 1.7;
+}
+
+.content-section h2{
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #d4b56a;
+    font-size: 24px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+}
+
+.content-section h3 {
+    color: #2c2c2c;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.content-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.content-section li {
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="menu.html">Menu</a>
+  <a href="location.html">Locations</a>
+  <a href="about us.html">About us</a>
+  <a href="contact us.html">Contact us</a>
+</nav>
+
+<div class="banner">
+<img src="images/locations banner.png" alt="Zeytin Catalkoy Locations">
+</div>
+
+<div id="map"></div>
+
+<div class="content-section">
+<h2>Leyton - Our Home</h2>
+<p>Established as our flagship location, this is where it all began. Our Leyton restaurant is the heart of Zeytin Catalköy, combining authentic Turkish cuisine with welcoming hospitality.</p>
+<p><strong>Location:</strong><br>42 Lea Bridge Road, Leyton, London, E10 7PZ</p>
+<h3>Opening Hours</h3>
+<ul>
+  <li><strong>Monday – Thursday:</strong> 12:00 PM – 10:00 PM</li>
+  <li><strong>Friday – Saturday:</strong> 12:00 PM – 11:00 PM</li>
+  <li><strong>Sunday:</strong> 1:00 PM – 9:00 PM</li>
+</ul>
+
+<h3>Contact & Reservations</h3>
+<ul>
+  <li><strong>Phone:</strong> +44 7774 264302</li>
+  <li><strong>Email:</strong> TaylanCelik@zeytincatalkoy.co.uk</li>
+  <li><strong>Web:</strong> www.zeytincatalkoy.co.uk</li>
+</ul>
+
+<h3>Getting Here</h3>
+<ul>
+  <li><strong>By Train:</strong> A short 5-minute walk from Lea Bridge Station.</li>
+  <li><strong>By Bus:</strong> Routes 55, 56, and L1 stop directly outside the restaurant.</li>
+  <li><strong>Parking:</strong> Limited street parking is available on nearby side roads after 6:30 PM.</li>
+</ul>
+
+<blockquote style="border-left: 4px solid #d4b56a; padding-left: 15px; margin: 20px 0; font-style: italic;">
+  <strong>Manager's Note:</strong> "We take pride in knowing our customers by name. Weekend bookings are essential as we get quite busy - don't hesitate to call us directly, Taylan and the team always have time for a chat!"
+</blockquote>
+</div>
+
+<div class="content-section">
+<h2>Our Other Locations</h2>
+<p>Quality and authenticity matter to us - that's why we've grown carefully, one neighborhood at a time.</p>
+<ul style="list-style: none; padding: 0;">
+  <li style="margin: 15px 0;"><strong>Shoreditch</strong> - Our trendy East London outpost in a vibrant creative hub</li>
+  <li style="margin: 15px 0;"><strong>Covent Garden</strong> - Right in the heart of the West End for those catching a show or exploring the city</li>
+  <li style="margin: 15px 0;"><strong>Hackney</strong> - A newer addition reflecting our commitment to bringing authentic Turkish food to every corner of London</li>
+</ul>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+
+// Initialize map centered roughly on London
+var map = L.map('map').setView([51.509865, -0.118092], 11);
+
+// Add OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Function to add a red marker
+function addRedMarker(lat, lon, text){
+    L.circleMarker([lat, lon], {
+        radius:8,
+        fillColor:"#ff0000",
+        color:"#ff0000",
+        weight:1,
+        opacity:1,
+        fillOpacity:0.9
+    }).addTo(map).bindPopup(text);
+}
+
+// Add markers (static) - you can customize addresses
+addRedMarker(51.5560, -0.0148, "Leyton - Main Restaurant");
+addRedMarker(51.5125, -0.0900, "Shoreditch Branch");
+addRedMarker(51.5090, -0.1180, "Covent Garden Branch");
+addRedMarker(51.5235, -0.0770, "Hackney Branch");
+
+</script>
+
+</body>
+</html>
